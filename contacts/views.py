@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 import djp.settings_secret as settings_secret
-from django.conf import settings
 from .models import Contact
 
 def contact(request):
@@ -33,8 +32,8 @@ def contact(request):
         send_mail(
             'Property Listing Inquiry',
             'There has been an inquiry for ' + listing + '. Sign into the admin panel for more info.',
-            settings.EMAIL_HOST_USER,
-            [realtor_email, settings.EMAIL_HOST_USER], # Send to own email as a test
+            settings_secret.EMAIL_HOST_USER,
+            [realtor_email, settings_secret.EMAIL_HOST_USER], # Send to own email as a test
             fail_silently=False
         )
 
