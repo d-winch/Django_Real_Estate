@@ -18,6 +18,15 @@ try:
 except ImportError:
     pass
 
+# See if we're running on Heroku
+is_prod = os.environ.get('IS_HEROKU', None)
+
+if is_prod:
+    # Get var from Heroku config vars
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,10 +39,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = settings_secret.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+DEBUG = False
 
-#ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'djp-real-estate.herokuapp.com']
 
 # Application definition
 
@@ -154,6 +162,8 @@ MESSAGE_TAGS = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'djp-real-estate.herokuapp.com']
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())

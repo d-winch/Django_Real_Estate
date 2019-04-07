@@ -1,8 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
-from djp.local_settings import EMAIL_HOST_USER
 from .models import Contact
+import os
+
+is_prod = os.environ.get('IS_HEROKU', None)
+
+if is_prod:
+    # Get var from Heroku config vars
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+else:
+    from djp.local_settings import EMAIL_HOST_USER
 
 def contact(request):
     if request.method == 'POST':
