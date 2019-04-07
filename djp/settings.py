@@ -11,7 +11,13 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import djp.settings_secret as settings_secret
+import django_heroku
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +27,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = settings_secret.SECRET_KEY
+#SECRET_KEY = settings_secret.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -85,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'djpdb',
         'USER': 'postgres',
-        'PASSWORD': settings_secret.POSTGRES_PASSWORD,
+        'PASSWORD': POSTGRES_PASSWORD,
         'HOST': 'localhost'
     }
 }
@@ -147,11 +153,7 @@ MESSAGE_TAGS = {
 # Email Config
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = settings_secret.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = settings_secret.EMAIL_HOST_PASSWORD
 EMAIL_USE_TLS = True
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
