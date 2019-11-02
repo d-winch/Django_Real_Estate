@@ -1,1 +1,1 @@
-web: gunicorn djp.wsgi
+web: gunicorn djp.wsgi --log-file -
