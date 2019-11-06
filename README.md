@@ -1,7 +1,7 @@
 # Django Real Estate Web App
 Implementation of a real estate website using the Django framework from the [Python Django Dev To Deployment](https://www.udemy.com/course/python-django-dev-to-deployment) Udemy course.
 
-Deployed to Digital Ocean using Gunicorn and Nginx. Viewable online at [real-estate.davidwin.ch](real-estate.davidwin.ch).
+Deployed to Digital Ocean using Gunicorn and Nginx. Viewable online at [real-estate.davidwin.ch](http://real-estate.davidwin.ch).
 
 Features a personalised admin area for creating/modifying listings, realtors, and accounts and authentication.
 
